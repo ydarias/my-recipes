@@ -1,4 +1,4 @@
-package com.ydarias.recipes.my_recipes;
+package com.ydarias.recipes.myrecipes;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package com.ydarias.recipes.my_recipes;
+package com.ydarias.recipes.myrecipes;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
