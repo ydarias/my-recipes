@@ -15,4 +15,8 @@ public class IngredientsCatalog {
     public List<Ingredient> getIngredients(int page, int size) {
         return ingredientsRepository.getIngredients(page, size);
     }
+
+    public Ingredient addIngredient(IngredientCreationCommand newIngredient) {
+        throw new RuntimeException("DFoo");
+    }
 }

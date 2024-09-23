@@ -7,27 +7,53 @@ import static org.mockito.Mockito.when;
 import java.util.Arrays;
 
 import com.ydarias.recipes.myrecipes.ingredients.Ingredient;
+import com.ydarias.recipes.myrecipes.ingredients.IngredientCreationCommand;
 import com.ydarias.recipes.myrecipes.ingredients.IngredientsCatalog;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 public class IngredientsControllerTests {
+    @Mock
+    private IngredientsCatalog ingredientsCatalog;
+
+    private IngredientsController controller;
+
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+        controller = new IngredientsController(ingredientsCatalog);
+    }
+
     @Test
     void ingredientsAreRecoveredFromIngredientsCatalog() {
-        var ingredientsCatalog = mock(IngredientsCatalog.class);
-        var controller = new IngredientsController(ingredientsCatalog);
         var ingredients = Arrays.asList(
-                Ingredient.build("23f3423f-3c38-48ec-afd9-0aceea05aa4d", "Lemon", new String[] {"JAN", "FEB", "MAR", "APR", "MAY"}),
-                Ingredient.build("6ec213a1-9e1d-4a73-ba5f-dfc621102af9", "Onion", new String[] {"APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT"}),
-                Ingredient.build("17edc0d1-5525-42d9-8d75-84c94996cd84", "Watermelon", new String[] {"JUN", "JUL", "AUG"}));
+                Ingredient.build("23f3423f-3c38-48ec-afd9-0aceea05aa4d", "Lemon", Arrays.asList("JAN", "FEB", "MAR", "APR", "MAY")),
+                Ingredient.build("6ec213a1-9e1d-4a73-ba5f-dfc621102af9", "Onion", Arrays.asList("APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT")),
+                Ingredient.build("17edc0d1-5525-42d9-8d75-84c94996cd84", "Watermelon", Arrays.asList("JUN", "JUL", "AUG")));
 
         when(ingredientsCatalog.getIngredients(1, 10)).thenReturn(ingredients);
 
         var result = controller.getIngredients(1, 10);
 
         var expectedIngredients = Arrays.asList(
-                IngredientResponse.build("23f3423f-3c38-48ec-afd9-0aceea05aa4d", "Lemon", new String[] {"JAN", "FEB", "MAR", "APR", "MAY"}),
-                IngredientResponse.build("6ec213a1-9e1d-4a73-ba5f-dfc621102af9", "Onion", new String[] {"APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT"}),
-                IngredientResponse.build("17edc0d1-5525-42d9-8d75-84c94996cd84", "Watermelon", new String[] {"JUN", "JUL", "AUG"}));
+                IngredientResponse.build("23f3423f-3c38-48ec-afd9-0aceea05aa4d", "Lemon", Arrays.asList("JAN", "FEB", "MAR", "APR", "MAY")),
+                IngredientResponse.build("6ec213a1-9e1d-4a73-ba5f-dfc621102af9", "Onion", Arrays.asList("APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT")),
+                IngredientResponse.build("17edc0d1-5525-42d9-8d75-84c94996cd84", "Watermelon", Arrays.asList("JUN", "JUL", "AUG")));
         assertThat(result).containsAll(expectedIngredients);
+    }
+
+    @Test
+    void ingredientsAreAddedUsingIngredientsCatalog() {
+        var newPear =  IngredientCreationCommand.build("Pear", Arrays.asList("JUL", "AUG", "SEP", "OCT", "NOV"));
+        var createdPear = Ingredient.build("8840e6d9-b11d-424f-91da-28c991f911eb", "Pear", Arrays.asList("JUL", "AUG", "SEP", "OCT", "NOV"));
+
+        when(ingredientsCatalog.addIngredient(newPear)).thenReturn(createdPear);
+
+        var result = controller.addIngredient(newPear);
+
+        var expectedPear = IngredientResponse.build("8840e6d9-b11d-424f-91da-28c991f911eb", "Pear", Arrays.asList("JUL", "AUG", "SEP", "OCT", "NOV"));
+        assertThat(result).isEqualTo(expectedPear);
     }
 }
