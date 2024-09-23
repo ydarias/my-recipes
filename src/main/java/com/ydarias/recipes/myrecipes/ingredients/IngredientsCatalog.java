@@ -6,7 +6,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class IngredientsCatalog {
+    private ForPersistingIngredients ingredientsRepository;
+
+    public IngredientsCatalog(ForPersistingIngredients ingredientsRepository) {
+        this.ingredientsRepository = ingredientsRepository;
+    }
+
     public List<Ingredient> getIngredients(int page, int size) {
-        throw new RuntimeException("Not implemented yet");
+        return this.ingredientsRepository.getIngredients(page, size);
     }
 }
