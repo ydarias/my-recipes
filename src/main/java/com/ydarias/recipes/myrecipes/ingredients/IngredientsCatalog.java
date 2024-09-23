@@ -1,5 +1,6 @@
 package com.ydarias.recipes.myrecipes.ingredients;
 
+import java.text.MessageFormat;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -18,7 +19,8 @@ public class IngredientsCatalog {
 
     public Ingredient addIngredient(IngredientCreationCommand newIngredient) {
         if (ingredientsRepository.doesExist(newIngredient.name())) {
-            throw new AlreadyExistingIngredientException();
+            var errorMessage = MessageFormat.format("Ingredient {0} already exists", newIngredient.name());
+            throw new AlreadyExistingIngredientException(errorMessage);
         }
 
         return ingredientsRepository.addIngredient(newIngredient);

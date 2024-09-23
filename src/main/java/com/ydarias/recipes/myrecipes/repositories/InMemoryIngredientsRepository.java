@@ -41,6 +41,7 @@ public class InMemoryIngredientsRepository implements ForPersistingIngredients {
 
     @Override
     public boolean doesExist(String ingredientName) {
-        return false;
+        var matchingIngredients = internalIngredientsDictionary.stream().filter(ingredient -> ingredient.name().equals(ingredientName)).toList();
+        return matchingIngredients.size() > 0;
     }
 }
