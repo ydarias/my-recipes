@@ -7,6 +7,7 @@ import static org.mockito.Mockito.when;
 import java.util.List;
 
 import com.ydarias.recipes.myrecipes.ingredients.errors.AlreadyExistingIngredientException;
+import com.ydarias.recipes.myrecipes.ingredients.errors.ValidationException;
 import com.ydarias.recipes.myrecipes.ingredients.models.Ingredient;
 import com.ydarias.recipes.myrecipes.ingredients.models.IngredientCreationCommand;
 import org.junit.jupiter.api.BeforeEach;
@@ -61,5 +62,12 @@ public class IngredientsCatalogTests {
         when(ingredientsRepository.doesExist("Pear")).thenReturn(true);
 
         assertThrows(AlreadyExistingIngredientException.class, () -> catalog.addIngredient(newPear));
+    }
+
+    @Test
+    void validationErrorIsThrownIfIngredientHasNoMandatoryFieldsValues() {
+        var newPear = new IngredientCreationCommand("", List.of());
+
+        assertThrows(ValidationException.class, () -> catalog.addIngredient(newPear));
     }
 }
