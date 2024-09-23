@@ -13,6 +13,6 @@ public class IngredientsCatalog {
     }
 
     public List<Ingredient> getIngredients(int page, int size) {
-        return this.ingredientsRepository.getIngredients(page, size);
+        return ingredientsRepository.getIngredients(page, size);
     }
 }
