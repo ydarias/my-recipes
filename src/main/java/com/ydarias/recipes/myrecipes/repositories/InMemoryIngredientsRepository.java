@@ -33,7 +33,7 @@ public class InMemoryIngredientsRepository implements ForPersistingIngredients {
 
     @Override
     public Ingredient addIngredient(IngredientCreationCommand newIngredient) {
-        var ingredient = new Ingredient(UUID.randomUUID().toString(), newIngredient.getName(), newIngredient.getSeasonality());
+        var ingredient = new Ingredient(UUID.randomUUID().toString(), newIngredient.name(), newIngredient.seasonality());
         internalIngredientsDictionary.add(ingredient);
 
         return ingredient;

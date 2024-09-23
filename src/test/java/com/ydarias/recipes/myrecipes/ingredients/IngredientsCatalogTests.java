@@ -38,7 +38,7 @@ public class IngredientsCatalogTests {
 
     @Test
     void theCatalogCreatesTheIngredientAtTheRepository() {
-        var newPear =  IngredientCreationCommand.build("Pear", List.of("JUL", "AUG", "SEP", "OCT", "NOV"));
+        var newPear = new IngredientCreationCommand("Pear", List.of("JUL", "AUG", "SEP", "OCT", "NOV"));
         var createdPear = new Ingredient("8840e6d9-b11d-424f-91da-28c991f911eb", "Pear", List.of("JUL", "AUG", "SEP", "OCT", "NOV"));
 
         when(ingredientsRepository.addIngredient(newPear)).thenReturn(createdPear);
