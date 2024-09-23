@@ -1,8 +1,6 @@
 package com.ydarias.recipes.myrecipes.controllers;
 
 import java.util.List;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import com.ydarias.recipes.myrecipes.ingredients.Ingredient;
 import com.ydarias.recipes.myrecipes.ingredients.IngredientCreationCommand;
@@ -27,23 +25,17 @@ public class IngredientsController {
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "10") int size) {
         var ingredients = ingredientsCatalog.getIngredients(page, size);
-        return ingredients.stream().map(asIngredientResponse()).toList();
+        return ingredients.stream().map(IngredientsController::asIngredientResponse).toList();
     }
 
     @PostMapping("/ingredients")
     public IngredientResponse addIngredient(@RequestBody IngredientCreationCommand newIngredient) {
         var createdIngredient = ingredientsCatalog.addIngredient(newIngredient);
-        return asIngredientResponse().apply(createdIngredient);
+        return IngredientsController.asIngredientResponse(createdIngredient);
     }
 
-    private static Function<Ingredient, IngredientResponse> asIngredientResponse() {
-        return ingredient -> {
-            var ingredientResponse = new IngredientResponse();
-            ingredientResponse.setId(ingredient.getId());
-            ingredientResponse.setName(ingredient.getName());
-            ingredientResponse.setSeasonality(ingredient.getSeasonality());
-
-            return ingredientResponse;
-        };
+    private static IngredientResponse asIngredientResponse(Ingredient ingredient) {
+        return new IngredientResponse(ingredient.id(), ingredient.name(), ingredient.seasonality());
     }
+
 }

@@ -1,7 +1,6 @@
 package com.ydarias.recipes.myrecipes.repositories;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
@@ -17,15 +16,15 @@ public class InMemoryIngredientsRepository implements ForPersistingIngredients {
     private List<Ingredient> internalIngredientsDictionary = new ArrayList<>();
 
     public InMemoryIngredientsRepository() {
-        internalIngredientsDictionary.add(Ingredient.build("23f3423f-3c38-48ec-afd9-0aceea05aa4d", "Lemon", Arrays.asList("JAN", "FEB", "MAR", "APR", "MAY")));
-        internalIngredientsDictionary.add(Ingredient.build("6ec213a1-9e1d-4a73-ba5f-dfc621102af9", "Onion", Arrays.asList("APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT")));
-        internalIngredientsDictionary.add(Ingredient.build("17edc0d1-5525-42d9-8d75-84c94996cd84", "Watermelon", Arrays.asList("JUN", "JUL", "AUG")));
+        internalIngredientsDictionary.add(new Ingredient("23f3423f-3c38-48ec-afd9-0aceea05aa4d", "Lemon", List.of("JAN", "FEB", "MAR", "APR", "MAY")));
+        internalIngredientsDictionary.add(new Ingredient("6ec213a1-9e1d-4a73-ba5f-dfc621102af9", "Onion", List.of("APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT")));
+        internalIngredientsDictionary.add(new Ingredient("17edc0d1-5525-42d9-8d75-84c94996cd84", "Watermelon", List.of("JUN", "JUL", "AUG")));
     }
 
     @Override
     public List<Ingredient> getIngredients(int page, int size) {
         return internalIngredientsDictionary.stream()
-                .sorted(Comparator.comparing(Ingredient::getName))
+                .sorted(Comparator.comparing(Ingredient::name))
                 .skip((page - 1) * size)
                 .limit(size)
                 .collect(Collectors.toList());
@@ -34,7 +33,7 @@ public class InMemoryIngredientsRepository implements ForPersistingIngredients {
 
     @Override
     public Ingredient addIngredient(IngredientCreationCommand newIngredient) {
-        var ingredient = Ingredient.build(UUID.randomUUID().toString(), newIngredient.getName(), newIngredient.getSeasonality());
+        var ingredient = new Ingredient(UUID.randomUUID().toString(), newIngredient.name(), newIngredient.seasonality());
         internalIngredientsDictionary.add(ingredient);
 
         return ingredient;
