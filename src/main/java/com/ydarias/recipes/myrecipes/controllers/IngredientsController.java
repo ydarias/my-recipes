@@ -1,8 +1,6 @@
 package com.ydarias.recipes.myrecipes.controllers;
 
 import java.util.List;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import com.ydarias.recipes.myrecipes.ingredients.Ingredient;
 import com.ydarias.recipes.myrecipes.ingredients.IngredientCreationCommand;
