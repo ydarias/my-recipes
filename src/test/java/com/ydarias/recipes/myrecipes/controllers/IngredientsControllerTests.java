@@ -37,9 +37,9 @@ public class IngredientsControllerTests {
         var result = controller.getIngredients(1, 10);
 
         var expectedIngredients = List.of(
-                IngredientResponse.build("23f3423f-3c38-48ec-afd9-0aceea05aa4d", "Lemon", List.of("JAN", "FEB", "MAR", "APR", "MAY")),
-                IngredientResponse.build("6ec213a1-9e1d-4a73-ba5f-dfc621102af9", "Onion", List.of("APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT")),
-                IngredientResponse.build("17edc0d1-5525-42d9-8d75-84c94996cd84", "Watermelon", List.of("JUN", "JUL", "AUG")));
+                new IngredientResponse("23f3423f-3c38-48ec-afd9-0aceea05aa4d", "Lemon", List.of("JAN", "FEB", "MAR", "APR", "MAY")),
+                new IngredientResponse("6ec213a1-9e1d-4a73-ba5f-dfc621102af9", "Onion", List.of("APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT")),
+                new IngredientResponse("17edc0d1-5525-42d9-8d75-84c94996cd84", "Watermelon", List.of("JUN", "JUL", "AUG")));
         assertThat(result).containsAll(expectedIngredients);
     }
 
@@ -52,7 +52,7 @@ public class IngredientsControllerTests {
 
         var result = controller.addIngredient(newPear);
 
-        var expectedPear = IngredientResponse.build("8840e6d9-b11d-424f-91da-28c991f911eb", "Pear", List.of("JUL", "AUG", "SEP", "OCT", "NOV"));
+        var expectedPear = new IngredientResponse("8840e6d9-b11d-424f-91da-28c991f911eb", "Pear", List.of("JUL", "AUG", "SEP", "OCT", "NOV"));
         assertThat(result).isEqualTo(expectedPear);
     }
 }
