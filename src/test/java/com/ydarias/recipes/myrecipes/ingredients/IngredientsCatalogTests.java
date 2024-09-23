@@ -1,6 +1,7 @@
 package com.ydarias.recipes.myrecipes.ingredients;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 import java.util.List;
@@ -48,5 +49,15 @@ public class IngredientsCatalogTests {
         var result = catalog.addIngredient(newPear);
 
         assertThat(result).isEqualTo(createdPear);
+    }
+
+
+    @Test
+    void errorIsThrownIfIngredientAlreadyExistsByName() {
+        var newPear = new IngredientCreationCommand("Pear", List.of("JUL", "AUG", "SEP", "OCT", "NOV"));
+
+        when(ingredientsRepository.doesExist("Pear")).thenReturn(true);
+
+        assertThrows(AlreadyExistingIngredientException.class, () -> catalog.addIngredient(newPear));
     }
 }

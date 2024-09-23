@@ -5,4 +5,5 @@ import java.util.List;
 public interface ForPersistingIngredients {
     List<Ingredient> getIngredients(int page, int size);
     Ingredient addIngredient(IngredientCreationCommand newIngredient);
+    boolean doesExist(String ingredientName);
 }
