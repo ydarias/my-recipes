@@ -1,7 +1,6 @@
 package com.ydarias.recipes.myrecipes.controllers;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -21,9 +20,9 @@ public class IngredientsControllerTests {
                 Ingredient.build("Onion", "6ec213a1-9e1d-4a73-ba5f-dfc621102af9", new String[] {"APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT"}),
                 Ingredient.build("Watermelon", "17edc0d1-5525-42d9-8d75-84c94996cd84", new String[] {"JUN", "JUL", "AUG"}));
 
-        when(ingredientsCatalog.getIngredients()).thenReturn(ingredients);
+        when(ingredientsCatalog.getIngredients(1, 10)).thenReturn(ingredients);
 
-        var result = controller.getIngredients();
+        var result = controller.getIngredients(1, 10);
 
         var expectedIngredients = Arrays.asList(
                 IngredientResponse.build("Lemon", "23f3423f-3c38-48ec-afd9-0aceea05aa4d", new String[] {"JAN", "FEB", "MAR", "APR", "MAY"}),

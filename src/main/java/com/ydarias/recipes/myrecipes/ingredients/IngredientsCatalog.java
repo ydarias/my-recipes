@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class IngredientsCatalog {
-    public List<Ingredient> getIngredients() {
+    public List<Ingredient> getIngredients(int page, int size) {
         throw new RuntimeException("Not implemented yet");
     }
 }
