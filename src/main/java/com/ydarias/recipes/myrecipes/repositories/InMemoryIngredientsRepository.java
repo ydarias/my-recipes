@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import com.ydarias.recipes.myrecipes.ingredients.ForPersistingIngredients;
@@ -32,7 +33,10 @@ public class InMemoryIngredientsRepository implements ForPersistingIngredients {
     }
 
     @Override
-    public Ingredient addIngredient(IngredientCreationCommand ingredient) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Ingredient addIngredient(IngredientCreationCommand newIngredient) {
+        var ingredient = Ingredient.build(UUID.randomUUID().toString(), newIngredient.getName(), newIngredient.getSeasonality());
+        internalIngredientsDictionary.add(ingredient);
+
+        return ingredient;
     }
 }
