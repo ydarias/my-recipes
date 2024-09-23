@@ -25,9 +25,9 @@ public class IngredientsCatalogTests {
     @Test
     void theCatalogGetsAnIngredientsPageFromTheRepository() {
         var ingredients = List.of(
-                Ingredient.build("23f3423f-3c38-48ec-afd9-0aceea05aa4d", "Lemon", List.of("JAN", "FEB", "MAR", "APR", "MAY")),
-                Ingredient.build("6ec213a1-9e1d-4a73-ba5f-dfc621102af9", "Onion", List.of("APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT")),
-                Ingredient.build("17edc0d1-5525-42d9-8d75-84c94996cd84", "Watermelon", List.of("JUN", "JUL", "AUG")));
+                new Ingredient("23f3423f-3c38-48ec-afd9-0aceea05aa4d", "Lemon", List.of("JAN", "FEB", "MAR", "APR", "MAY")),
+                new Ingredient("6ec213a1-9e1d-4a73-ba5f-dfc621102af9", "Onion", List.of("APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT")),
+                new Ingredient("17edc0d1-5525-42d9-8d75-84c94996cd84", "Watermelon", List.of("JUN", "JUL", "AUG")));
 
         when(ingredientsRepository.getIngredients(1, 10)).thenReturn(ingredients);
 
@@ -39,7 +39,7 @@ public class IngredientsCatalogTests {
     @Test
     void theCatalogCreatesTheIngredientAtTheRepository() {
         var newPear =  IngredientCreationCommand.build("Pear", List.of("JUL", "AUG", "SEP", "OCT", "NOV"));
-        var createdPear = Ingredient.build("8840e6d9-b11d-424f-91da-28c991f911eb", "Pear", List.of("JUL", "AUG", "SEP", "OCT", "NOV"));
+        var createdPear = new Ingredient("8840e6d9-b11d-424f-91da-28c991f911eb", "Pear", List.of("JUL", "AUG", "SEP", "OCT", "NOV"));
 
         when(ingredientsRepository.addIngredient(newPear)).thenReturn(createdPear);
 

@@ -35,7 +35,7 @@ public class IngredientsController {
     }
 
     private static IngredientResponse asIngredientResponse(Ingredient ingredient) {
-        return new IngredientResponse(ingredient.getId(), ingredient.getName(), ingredient.getSeasonality());
+        return new IngredientResponse(ingredient.id(), ingredient.name(), ingredient.seasonality());
     }
 
 }
