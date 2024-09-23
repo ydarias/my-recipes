@@ -38,4 +38,9 @@ public class InMemoryIngredientsRepository implements ForPersistingIngredients {
 
         return ingredient;
     }
+
+    @Override
+    public boolean doesExist(String ingredientName) {
+        return false;
+    }
 }

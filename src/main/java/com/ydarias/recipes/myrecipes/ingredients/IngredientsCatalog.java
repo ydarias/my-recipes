@@ -17,6 +17,10 @@ public class IngredientsCatalog {
     }
 
     public Ingredient addIngredient(IngredientCreationCommand newIngredient) {
+        if (ingredientsRepository.doesExist(newIngredient.name())) {
+            throw new AlreadyExistingIngredientException();
+        }
+
         return ingredientsRepository.addIngredient(newIngredient);
     }
 }
