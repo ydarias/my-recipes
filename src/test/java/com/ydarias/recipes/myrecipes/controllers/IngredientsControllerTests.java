@@ -10,9 +10,12 @@ import com.ydarias.recipes.myrecipes.ingredients.IngredientCreationCommand;
 import com.ydarias.recipes.myrecipes.ingredients.IngredientsCatalog;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+@ExtendWith(MockitoExtension.class)
 public class IngredientsControllerTests {
     @Mock
     private IngredientsCatalog ingredientsCatalog;
@@ -21,7 +24,6 @@ public class IngredientsControllerTests {
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);
         controller = new IngredientsController(ingredientsCatalog);
     }
 
