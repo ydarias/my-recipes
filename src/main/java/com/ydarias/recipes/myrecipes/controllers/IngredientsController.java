@@ -5,8 +5,11 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import com.ydarias.recipes.myrecipes.ingredients.Ingredient;
+import com.ydarias.recipes.myrecipes.ingredients.IngredientCreationCommand;
 import com.ydarias.recipes.myrecipes.ingredients.IngredientsCatalog;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,7 +27,13 @@ public class IngredientsController {
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "10") int size) {
         var ingredients = ingredientsCatalog.getIngredients(page, size);
-        return ingredients.stream().map(asIngredientResponse()).collect(Collectors.toList());
+        return ingredients.stream().map(asIngredientResponse()).toList();
+    }
+
+    @PostMapping("/ingredients")
+    public IngredientResponse addIngredient(@RequestBody IngredientCreationCommand newIngredient) {
+        var createdIngredient = ingredientsCatalog.addIngredient(newIngredient);
+        return asIngredientResponse().apply(createdIngredient);
     }
 
     private static Function<Ingredient, IngredientResponse> asIngredientResponse() {
