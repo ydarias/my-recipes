@@ -1,4 +1,4 @@
-package com.ydarias.recipes.myrecipes.ingredients;
+package com.ydarias.recipes.myrecipes.ingredients.models;
 
 import java.util.List;
 

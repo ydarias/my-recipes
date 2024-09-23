@@ -3,6 +3,9 @@ package com.ydarias.recipes.myrecipes.ingredients;
 import java.text.MessageFormat;
 import java.util.List;
 
+import com.ydarias.recipes.myrecipes.ingredients.errors.AlreadyExistingIngredientException;
+import com.ydarias.recipes.myrecipes.ingredients.models.Ingredient;
+import com.ydarias.recipes.myrecipes.ingredients.models.IngredientCreationCommand;
 import org.springframework.stereotype.Service;
 
 @Service

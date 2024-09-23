@@ -5,14 +5,15 @@ import static org.mockito.Mockito.when;
 
 import java.util.List;
 
-import com.ydarias.recipes.myrecipes.ingredients.Ingredient;
-import com.ydarias.recipes.myrecipes.ingredients.IngredientCreationCommand;
+import com.ydarias.recipes.myrecipes.controllers.models.IngredientResponse;
+import com.ydarias.recipes.myrecipes.controllers.models.CreateIngredientRequest;
+import com.ydarias.recipes.myrecipes.ingredients.models.Ingredient;
 import com.ydarias.recipes.myrecipes.ingredients.IngredientsCatalog;
+import com.ydarias.recipes.myrecipes.ingredients.models.IngredientCreationCommand;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
@@ -47,10 +48,11 @@ public class IngredientsControllerTests {
 
     @Test
     void ingredientsAreAddedUsingIngredientsCatalog() {
-        var newPear = new IngredientCreationCommand("Pear", List.of("JUL", "AUG", "SEP", "OCT", "NOV"));
+        var newPear = new CreateIngredientRequest("Pear", List.of("JUL", "AUG", "SEP", "OCT", "NOV"));
+        var newPearCommand = new IngredientCreationCommand("Pear", List.of("JUL", "AUG", "SEP", "OCT", "NOV"));
         var createdPear = new Ingredient("8840e6d9-b11d-424f-91da-28c991f911eb", "Pear", List.of("JUL", "AUG", "SEP", "OCT", "NOV"));
 
-        when(ingredientsCatalog.addIngredient(newPear)).thenReturn(createdPear);
+        when(ingredientsCatalog.addIngredient(newPearCommand)).thenReturn(createdPear);
 
         var result = controller.addIngredient(newPear);
 
