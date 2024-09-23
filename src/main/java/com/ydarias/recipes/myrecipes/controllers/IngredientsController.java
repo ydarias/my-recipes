@@ -26,7 +26,7 @@ public class IngredientsController {
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "10") int size) {
         var ingredients = ingredientsCatalog.getIngredients(page, size);
-        return ingredients.stream().map(asIngredientResponse()).collect(Collectors.toList());
+        return ingredients.stream().map(asIngredientResponse()).toList();
     }
 
     @PostMapping("/ingredients")

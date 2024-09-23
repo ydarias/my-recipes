@@ -17,6 +17,6 @@ public class IngredientsCatalog {
     }
 
     public Ingredient addIngredient(IngredientCreationCommand newIngredient) {
-        throw new RuntimeException("DFoo");
+        return ingredientsRepository.addIngredient(newIngredient);
     }
 }

@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import com.ydarias.recipes.myrecipes.ingredients.ForPersistingIngredients;
 import com.ydarias.recipes.myrecipes.ingredients.Ingredient;
+import com.ydarias.recipes.myrecipes.ingredients.IngredientCreationCommand;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -28,5 +29,10 @@ public class InMemoryIngredientsRepository implements ForPersistingIngredients {
                 .limit(size)
                 .collect(Collectors.toList());
 
+    }
+
+    @Override
+    public Ingredient addIngredient(IngredientCreationCommand ingredient) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }
