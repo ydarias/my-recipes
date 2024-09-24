@@ -7,8 +7,8 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import com.ydarias.recipes.myrecipes.ingredients.ForPersistingIngredients;
-import com.ydarias.recipes.myrecipes.ingredients.Ingredient;
-import com.ydarias.recipes.myrecipes.ingredients.IngredientCreationCommand;
+import com.ydarias.recipes.myrecipes.ingredients.models.Ingredient;
+import com.ydarias.recipes.myrecipes.ingredients.models.IngredientCreationCommand;
 import org.springframework.stereotype.Service;
 
 @Service

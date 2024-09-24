@@ -1,4 +1,4 @@
-package com.ydarias.recipes.myrecipes.controllers;
+package com.ydarias.recipes.myrecipes.controllers.models;
 
 import java.util.List;
 

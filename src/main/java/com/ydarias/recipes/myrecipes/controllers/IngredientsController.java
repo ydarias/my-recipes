@@ -2,10 +2,13 @@ package com.ydarias.recipes.myrecipes.controllers;
 
 import java.util.List;
 
-import com.ydarias.recipes.myrecipes.ingredients.AlreadyExistingIngredientException;
-import com.ydarias.recipes.myrecipes.ingredients.Ingredient;
-import com.ydarias.recipes.myrecipes.ingredients.IngredientCreationCommand;
+import com.ydarias.recipes.myrecipes.controllers.models.CreateIngredientRequest;
+import com.ydarias.recipes.myrecipes.controllers.models.IngredientResponse;
 import com.ydarias.recipes.myrecipes.ingredients.IngredientsCatalog;
+import com.ydarias.recipes.myrecipes.ingredients.errors.AlreadyExistingIngredientException;
+import com.ydarias.recipes.myrecipes.ingredients.models.Ingredient;
+import com.ydarias.recipes.myrecipes.ingredients.models.IngredientCreationCommand;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -33,8 +36,9 @@ public class IngredientsController {
     }
 
     @PostMapping("/ingredients")
-    public IngredientResponse addIngredient(@RequestBody IngredientCreationCommand newIngredient) {
-        var createdIngredient = ingredientsCatalog.addIngredient(newIngredient);
+    public IngredientResponse addIngredient(@Valid @RequestBody CreateIngredientRequest newIngredient) {
+        var newIngredientCommand = new IngredientCreationCommand(newIngredient.name(), newIngredient.seasonality());
+        var createdIngredient = ingredientsCatalog.addIngredient(newIngredientCommand);
         return IngredientsController.asIngredientResponse(createdIngredient);
     }
 
