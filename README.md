@@ -14,10 +14,24 @@ There are some common premises along the entire project:
 
 1. As it worked pretty well for me in the past, the core uses Hexagonal Architecture to demonstrate the decoupling between third-parties and the business code.
 2. The project will use the monorepo practices.
-
-TBD
+3. TBD
 
 ## :classical_building: The Solution Architecture
+
+### Implicit driving ports definition
+
+Because usually there are no more than one implementation from the driving ports, and defining the interface explicitly using the `interface` keyword, all driving ports are defined by the implementing class interface (like in the API, not the `interface` keyword)
+
+![For managing ingredients port diagram](docs/assets/for-managing-ingredients-port.png)
+
+The implementing class has an interface but doesn't use the `implements` keyword for the original port name.
+
+```java
+@Service
+public class IngredientsCatalog {
+    ...
+}
+```
 
 ## Miscelaneous
 
