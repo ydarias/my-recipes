@@ -5,7 +5,13 @@ import java.util.List;
 import com.ydarias.recipes.myrecipes.recipes.models.Recipe;
 
 public class RecipesCatalog {
+    private ForPersistingRecipes recipesRepository;
+
+    public RecipesCatalog(ForPersistingRecipes recipesRepository) {
+        this.recipesRepository = recipesRepository;
+    }
+
     public List<Recipe> getRecipes(int page, int size) {
-        throw new RuntimeException("Not implemented");
+        return this.recipesRepository.getRecipes(page, size);
     }
 }
