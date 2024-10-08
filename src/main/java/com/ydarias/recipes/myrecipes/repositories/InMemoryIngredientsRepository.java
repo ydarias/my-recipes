@@ -9,9 +9,9 @@ import java.util.stream.Collectors;
 import com.ydarias.recipes.myrecipes.ingredients.ForPersistingIngredients;
 import com.ydarias.recipes.myrecipes.ingredients.models.Ingredient;
 import com.ydarias.recipes.myrecipes.ingredients.models.IngredientCreationCommand;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
-@Service
+@Repository
 public class InMemoryIngredientsRepository implements ForPersistingIngredients {
     private List<Ingredient> internalIngredientsDictionary = new ArrayList<>();
 
